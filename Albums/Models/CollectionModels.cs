@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Albums.Models
 {
-    public class Photo
+    public class PhotoModel
     {
         public int albumId { get; set; }
 
@@ -18,7 +18,7 @@ namespace Albums.Models
         public string thumbnailUrl { get; set; }
     }
 
-    public class Album
+    public class AlbumModel
     {
         [JsonProperty(PropertyName = "id")]
         public int albumId { get; set; }
@@ -28,10 +28,4 @@ namespace Albums.Models
         public string title { get; set; }
     }
 
-    public class User 
-    {
-        public int userId { get; set; }
-
-        public List<Album> albumList { get; set; }
-    }
 }
