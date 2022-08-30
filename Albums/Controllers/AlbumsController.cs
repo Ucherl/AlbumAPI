@@ -23,7 +23,7 @@ namespace Albums.Controllers
 
         [HttpGet]
         [Route("userCollection/{userId}")]
-        public async Task<ActionResult<List<User>>> UsersCollection (int userId)
+        public async Task<ActionResult<User>> UsersCollection (int userId)
         {
                
             /**
@@ -56,9 +56,10 @@ namespace Albums.Controllers
                             thumbnailUrl = x.thumbnailUrl
                         }).ToList()
                     };
-                
+
                 if(userAlbumList.Count()==0) return NotFound();
-                else{
+                else
+                {
                     User res = new User();
                     res.userId = userId;
                     res.albumList = userAlbumList.ToList();
