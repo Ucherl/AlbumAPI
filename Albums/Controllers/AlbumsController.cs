@@ -16,33 +16,28 @@ namespace Albums.Controllers
     {
 
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ILogger<AlbumsController> _logger;
 
-        public AlbumsController(IHttpClientFactory httpClientFactory){
+        public AlbumsController(IHttpClientFactory httpClientFactory, ILogger<AlbumsController> logger){
             _httpClientFactory = httpClientFactory;
+            _logger = logger;
         }
 
         [HttpGet]
         [Route("userCollection/{userId}")]
         public async Task<ActionResult<User>> UsersCollection (int userId)
         {
-               
-            /**
-            case 1 : no resource
-            case 2 : there is photos 
-            case 3 : bugs
-            **/
             try
             {
                 var client = _httpClientFactory.CreateClient();
                 client.BaseAddress = new Uri("http://jsonplaceholder.typicode.com");
 
-                var albumString = await client.GetStringAsync("albums");
-                var allAlbums = JsonConvert.DeserializeObject<List<AlbumModel>>(albumString);
+                var albumResonse = await client.GetStringAsync("albums");
+                var allAlbums = JsonConvert.DeserializeObject<List<AlbumModel>>(albumResonse);
 
-                var photoString = await client.GetStringAsync("photos");
-                var allPhotos = JsonConvert.DeserializeObject<List<PhotoModel>>(photoString);
+                var photoResponse = await client.GetStringAsync("photos");
+                var allPhotos = JsonConvert.DeserializeObject<List<PhotoModel>>(photoResponse);
 
-                //get the userId's collection
                 var userAlbumList = from album in allAlbums
                     join photo in allPhotos on album.albumId equals photo.albumId
                     where album.userId == userId
@@ -57,18 +52,23 @@ namespace Albums.Controllers
                         }).ToList()
                     };
 
-                if(userAlbumList.Count()==0) return NotFound();
+                if(userAlbumList.Count()==0)
+                {
+                    _logger.LogTrace($"UsersCollectionAPI:{userId}", "NotFound");
+                    return NotFound();
+                }
                 else
                 {
                     User res = new User();
                     res.userId = userId;
                     res.albumList = userAlbumList.ToList();
+                    _logger.LogTrace($"UsersCollectionAPI:{userId}", res);
                     return Ok(res);
                 }
 
             }
             catch(Exception ex){
-                //log something
+                _logger.LogError(ex, $"UsersCollectionAPI:{userId}-{ex.Message}-{ex.StackTrace}",null);
                 return StatusCode(500);
             }
 

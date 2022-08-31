@@ -27,6 +27,7 @@ namespace Albums
         {
             services.AddControllers();
             services.AddHttpClient();
+            services.AddLogging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

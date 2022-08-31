@@ -23,18 +23,28 @@ namespace UnitTest
         }
 
         //user id range : 1~10
-        [Test]
-        public async Task NoUser()
+        [TestCase(11)]
+        [TestCase(0)]
+        public async Task NoUser(int userId)
         {
-            var response = await client.GetAsync("api/Albums/userCollection/200");
+            var response = await client.GetAsync($"api/Albums/userCollection/{userId}");
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
         }
 
-        [Test]
-        public async Task ExistUser()
+        [TestCase(4)]
+        [TestCase(9)]
+        public async Task ExistUser(int userId)
         {
-            var response = await client.GetAsync("api/Albums/userCollection/1");
+            var response = await client.GetAsync($"api/Albums/userCollection/{userId}");
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [TestCase("aab")]
+        [TestCase(":)")]
+        public async Task InvalidUserInput(string invalidUserId)
+        {
+            var response = await client.GetAsync($"api/Albums/userCollection/{invalidUserId}");
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
         [TestCase(1, ExpectedResult=10)]
