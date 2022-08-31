@@ -1,6 +1,7 @@
 # AlbumAPI
 
 ### What this project do
+Task Description
 > Design and create a RESTful API in ASP.NET Core. 
 > The API should call, combine, and return 2 API endpoints into a single HTTP response.
 > The response should show the combined collection so that each Album contains a collection of its Photos.
@@ -10,14 +11,18 @@
 > and one to return data relating to a single User Id.
 
 ### How to run this project
-Install
-- [x] Git
-- [x] Dotnet CLI
 
-![Open terminal](https://i.imgur.com/VA0kYhp.png =300x)
+- [x] Install Git
+- [x] Install Dotnet CLI
+- [x] Open terminal and follow the pic below
+![Open terminal](https://i.imgur.com/VA0kYhp.png)
 
-![Open Postman](https://i.imgur.com/AIZX2QX.png =300x)
+![Open Postman](https://i.imgur.com/AIZX2QX.png)
 
 ### TODO
+- [ ] refine logger
+- [ ] create API endpoint to retrieve specified album/photo resource for internal usage
+      -> the UserCollections API retrieve all the dataset then join for the user's result
+      -> unnecessary IO
 
 
