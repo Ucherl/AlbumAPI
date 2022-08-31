@@ -14,9 +14,9 @@ Install
 - [x] Git
 - [x] Dotnet CLI
 
-![Open terminal](https://i.imgur.com/VA0kYhp.png)
+![Open terminal](https://i.imgur.com/VA0kYhp.png =300x)
 
-![Open Postman](https://i.imgur.com/AIZX2QX.png)
+![Open Postman](https://i.imgur.com/AIZX2QX.png =300x)
 
 ### TODO
 
