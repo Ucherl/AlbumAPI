@@ -15,9 +15,11 @@ Task Description
 - [x] Install Git
 - [x] Install Dotnet CLI
 - [x] Open terminal and follow the pic below
-![Open terminal](https://i.imgur.com/VA0kYhp.png)
+![terminal](https://i.imgur.com/VA0kYhp.png)
 
-![Open Postman](https://i.imgur.com/AIZX2QX.png)
+### API Endpoint
+- .../api/Albums/UserCollection/{userId}
+![Postman](https://i.imgur.com/AIZX2QX.png)
 
 ### TODO
 - [ ] refine logger
